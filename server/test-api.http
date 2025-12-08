@@ -1,2 +1,23 @@
-# test-api.http
+### server/test-api.http
+
 ### Create Player
+POST http://localhost:3001/api/players
+Content-Type: application/json
+
+{
+  "name": "Ryan"
+}
+
+### Get All Players
+GET http://localhost:3001/api/players
+
+### Get Player by ID (replace with actual ID)
+GET http://localhost:3001/api/players/PLAYER-ID-HERE
+
+### Try Duplicate Name (should fail)
+POST http://localhost:3001/api/players
+Content-Type: application/json
+
+{
+  "name": "Ryan"
+}
