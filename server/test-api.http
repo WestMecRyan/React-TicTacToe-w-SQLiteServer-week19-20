@@ -24,3 +24,36 @@ Content-Type: application/json
 {
   "name": "Ryan"
 }
+
+### Record a WIN for player
+POST http://localhost:3001/api/players/{{playerId}}/stats
+Content-Type: application/json
+
+{
+  "result": "win"
+}
+
+### Record a LOSS for player
+POST http://localhost:3001/api/players/{{playerId}}/stats
+Content-Type: application/json
+
+{
+  "result": "loss"
+}
+
+### Record a TIE for player
+POST http://localhost:3001/api/players/{{playerId}}/stats
+Content-Type: application/json
+
+{
+  "result": "tie"
+}
+
+### Get Updated Player Stats
+GET http://localhost:3001/api/players/{{playerId}}
+
+### Get Leaderboard (top 10)
+GET http://localhost:3001/api/leaderboard
+
+### Get Leaderboard (top 5)
+GET http://localhost:3001/api/leaderboard?limit=5

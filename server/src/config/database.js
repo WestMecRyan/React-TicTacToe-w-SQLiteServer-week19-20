@@ -17,15 +17,19 @@ if (!fs.existsSync(dbDir)) {
 
 const db = new DatabaseSync(dbPath);
 
-// Create players table
+// Create players table WITH stats columns
 db.exec(`
   CREATE TABLE IF NOT EXISTS players (
     id TEXT PRIMARY KEY,
     name TEXT NOT NULL UNIQUE,
+    wins INTEGER DEFAULT 0,
+    losses INTEGER DEFAULT 0,
+    ties INTEGER DEFAULT 0,
+    total_games INTEGER DEFAULT 0,
     created_at INTEGER NOT NULL
   )
 `);
 
-console.log('✅ Database initialized');
+console.log('✅ Database initialized with player stats tracking');
 
 export default db;

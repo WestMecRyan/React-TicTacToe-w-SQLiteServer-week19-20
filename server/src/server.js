@@ -48,6 +48,36 @@ app.get("/api/players/:id", (req, res) => {
   res.json({ success: true, player });
 });
 
+// NEW: Update player stats
+app.post("/api/players/:id/stats", (req, res) => {
+  try {
+    const { result } = req.body; // 'win', 'loss', or 'tie'
+
+    if (!result || !['win', 'loss', 'tie'].includes(result)) {
+      return res.status(400).json({
+        error: 'Result must be "win", "loss", or "tie"'
+      });
+    }
+
+    const player = updatePlayerStats(req.params.id, result);
+
+    if (player.error) {
+      return res.status(player.status).json({ error: player.error });
+    }
+
+    res.json({ success: true, player });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// NEW: Get leaderboard
+app.get("/api/leaderboard", (req, res) => {
+  const limit = parseInt(req.query.limit) || 10;
+  const leaderboard = getLeaderboard(limit);
+  res.json({ success: true, leaderboard });
+});
+
 // Error handlers (same as before)
 app.use((req, res) => {
   res.status(404).send("The page you're looking for does not exist");
