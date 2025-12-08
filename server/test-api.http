@@ -1,7 +1,10 @@
 ### server/test-api.http
 
+### Variables
+@playerId = 0bfc72ab-b05b-4d0c-9e02-429c63e52f9c
+
 ### Create Player
-POST http://localhost:3001/api/players
+POST http://localhost:3000/api/players
 Content-Type: application/json
 
 {
@@ -9,13 +12,13 @@ Content-Type: application/json
 }
 
 ### Get All Players
-GET http://localhost:3001/api/players
+GET http://localhost:3000/api/players
 
 ### Get Player by ID (replace with actual ID)
-GET http://localhost:3001/api/players/PLAYER-ID-HERE
+GET http://localhost:3000/api/players/{{playerId}}
 
 ### Try Duplicate Name (should fail)
-POST http://localhost:3001/api/players
+POST http://localhost:3000/api/players
 Content-Type: application/json
 
 {
