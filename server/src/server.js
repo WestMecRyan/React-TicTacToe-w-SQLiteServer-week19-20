@@ -1,7 +1,11 @@
 // server/src/server.js
 import express from "express";
 import "dotenv/config";
-import { createPlayer, getAllPlayers, getPlayer } from './services/playerService.js';
+import {
+  createPlayer,
+  getAllPlayers,
+  getPlayer,
+} from "./services/playerService.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,8 +21,15 @@ app.post("/api/players", (req, res) => {
   try {
     const { name } = req.body;
 
+    /*
+    const trimmedName = name?.trim();
+    if (!trimmedName) {
+      return res.status(400).json({ error: "Name is required" });
+    }
+    const player = createPlayer(trimmedName);
+*/
     if (!name || !name.trim()) {
-      return res.status(400).json({ error: 'Name is required' });
+      return res.status(400).json({ error: "Name is required" });
     }
 
     const player = createPlayer(name.trim());
@@ -65,3 +76,4 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Server is listening on ${PORT}`);
 });
+
